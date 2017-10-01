@@ -7,6 +7,8 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:showIn="@layout/activity_upload_file"
-        tools:context="com.cloudcraftgaming.universalfileuploader.UploadFile">
+        tools:context="com.cloudcraftgaming.universalfileuploader.UploadFile"
+        tools:layout_editor_absoluteY="81dp"
+        tools:layout_editor_absoluteX="0dp">
 
 </android.support.constraint.ConstraintLayout>

@@ -8,9 +8,12 @@
         tools:context="com.cloudcraftgaming.universalfileuploader.UploadFile">
 
     <android.support.design.widget.AppBarLayout
-            android:layout_height="wrap_content"
+            android:layout_height="570dp"
             android:layout_width="match_parent"
-            android:theme="@style/AppTheme.AppBarOverlay">
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:id="@+id/appBarLayout"
+            app:expanded="false"
+            android:fitsSystemWindows="true">
 
         <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -19,16 +22,38 @@
                 android:background="?attr/colorPrimary"
                 app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
+        <Button
+                android:text="@string/select_file"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:id="@+id/select-file"
+                android:layout_weight="1"/>
+
+        <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        <Spinner
+                android:layout_width="match_parent"
+                android:id="@+id/selected-uploader"
+                android:entries="@array/uploader_select"
+                android:layout_weight="1"
+                android:layout_height="10dp"/>
+
+        <Space
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        <Button
+                android:text="@string/upload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/upload-button"
+                android:baselineAligned="false"
+                android:layout_weight="1"/>
+
     </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_upload_file"/>
-
-    <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@android:drawable/ic_dialog_email"/>
 
 </android.support.design.widget.CoordinatorLayout>
