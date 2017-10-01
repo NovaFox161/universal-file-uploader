@@ -2,8 +2,6 @@ package com.cloudcraftgaming.universalfileuploader.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import com.cloudcraftgaming.universalfileuploader.R;
@@ -28,14 +26,12 @@ public class SettingsActivity extends AppCompatActivity {
         nothingDomainsKey = findViewById(R.id.nothing_domains_key);
 
         refreshDisplay();
+    }
 
-        final Button backButton = findViewById(R.id.back_button);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                saveSettings();
-                finish();
-            }
-        });
+    @Override
+    protected void onPause() {
+        saveSettings();
+        super.onPause();
     }
 
     private void saveSettings() {

@@ -5,17 +5,12 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <Button
-            android:id="@+id/back-button"
-            android:background="?attr/actionModeCloseDrawable"
-            android:layout_width="50dp"
-            android:layout_height="50dp"/>
-
     <Switch
             android:text="@string/upload_only_on_wifi"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/wifi-only-upload"/>
+            android:layout_height="50dp"
+            android:id="@+id/wifi-only-upload"
+            />
 
     <View
             android:layout_width="fill_parent"
