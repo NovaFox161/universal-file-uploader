@@ -1,5 +1,6 @@
 package com.cloudcraftgaming.universalfileuploader.network;
 
+import android.content.Intent;
 import android.widget.Spinner;
 import com.kbeanie.multipicker.api.FilePicker;
 
@@ -19,7 +20,7 @@ public class UploadManager {
     private UploadManager() {
     }
 
-    public boolean handleUpload(FilePicker filePicker, Spinner selectedUploader) {
+    public boolean handleUpload(FilePicker filePicker, Intent file, Spinner selectedUploader) {
         if (selectedUploader.getSelectedItemPosition() == 1) {
             //TODO: Handle upload to nothing domains
         }

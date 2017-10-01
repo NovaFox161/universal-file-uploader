@@ -9,6 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Spinner;
+import com.cloudcraftgaming.universalfileuploader.activities.SettingsActivity;
+import com.cloudcraftgaming.universalfileuploader.handlers.AlertHandler;
+import com.cloudcraftgaming.universalfileuploader.network.SettingsManager;
 import com.cloudcraftgaming.universalfileuploader.network.UploadManager;
 import com.kbeanie.multipicker.api.FilePicker;
 import com.kbeanie.multipicker.api.Picker;
@@ -19,6 +22,8 @@ import java.util.List;
 
 public class UploadFile extends AppCompatActivity {
     FilePicker filePicker;
+
+    Intent file = null;
 
     Button fileSelect;
     Button uploadButton;
@@ -31,6 +36,8 @@ public class UploadFile extends AppCompatActivity {
         setContentView(R.layout.activity_upload_file);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        SettingsManager.getManager().init(this);
 
         filePicker = new FilePicker(this);
 
@@ -62,11 +69,15 @@ public class UploadFile extends AppCompatActivity {
 
         uploadButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (selectedUploader.getSelectedItemPosition() == 0) {
-                    //TODO: Add alert dialog for no uploader selected
+                if (file == null) {
+                    AlertHandler.noFileAlert(UploadFile.this);
                 } else {
-                    //Let the upload manager go from here.
-                    UploadManager.getManager().handleUpload(filePicker, selectedUploader);
+                    if (selectedUploader.getSelectedItemPosition() == 0) {
+                        AlertHandler.noUploaderAlert(UploadFile.this);
+                    } else {
+                        //Let the upload manager go from here.
+                        UploadManager.getManager().handleUpload(filePicker, file, selectedUploader);
+                    }
                 }
             }
         });
@@ -89,7 +100,7 @@ public class UploadFile extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            //TODO: Make settings to handle Nothing Domains Auth key and other settings!!
+            startActivity(new Intent(this, SettingsActivity.class));
         }
 
         return super.onOptionsItemSelected(item);
@@ -101,6 +112,7 @@ public class UploadFile extends AppCompatActivity {
         if (requestCode == Picker.PICK_FILE && resultCode == RESULT_OK) {
             filePicker.submit(data);
             fileSelect.setText(data.getDataString());
+            file = data;
         }
     }
 }
