@@ -1,8 +1,11 @@
 package com.cloudcraftgaming.universalfileuploader.network;
 
+import android.content.Context;
 import android.content.Intent;
 import android.widget.Spinner;
-import com.kbeanie.multipicker.api.FilePicker;
+import com.cloudcraftgaming.universalfileuploader.network.uploaders.NothingDomains;
+
+import java.io.File;
 
 /**
  * Created by Nova Fox on 9/30/17.
@@ -20,9 +23,10 @@ public class UploadManager {
     private UploadManager() {
     }
 
-    public boolean handleUpload(FilePicker filePicker, Intent file, Spinner selectedUploader) {
+    public boolean handleUpload(Context context, Intent file, Spinner selectedUploader) {
         if (selectedUploader.getSelectedItemPosition() == 1) {
             //TODO: Handle upload to nothing domains
+            new NothingDomains().execute(new File(file.getData().getPath()), context);
         }
         return false;
     }

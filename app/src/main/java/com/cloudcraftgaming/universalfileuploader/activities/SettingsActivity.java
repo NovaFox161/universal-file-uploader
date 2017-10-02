@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.Switch;
 import com.cloudcraftgaming.universalfileuploader.R;
-import com.cloudcraftgaming.universalfileuploader.network.SettingsManager;
+import com.cloudcraftgaming.universalfileuploader.handlers.SettingsManager;
 import org.json.JSONException;
 import org.json.JSONObject;
 

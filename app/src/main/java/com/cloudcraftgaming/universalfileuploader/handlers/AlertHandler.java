@@ -37,4 +37,17 @@ public class AlertHandler {
                 });
         alertDialog.show();
     }
+
+    public static void uploadErrorAlert(Context context) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+        alertDialog.setTitle("Upload Error");
+        alertDialog.setMessage("An error has occurred while uploading your file!");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+    }
 }

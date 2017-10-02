@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import com.cloudcraftgaming.universalfileuploader.activities.SettingsActivity;
 import com.cloudcraftgaming.universalfileuploader.handlers.AlertHandler;
-import com.cloudcraftgaming.universalfileuploader.network.SettingsManager;
+import com.cloudcraftgaming.universalfileuploader.handlers.SettingsManager;
 import com.cloudcraftgaming.universalfileuploader.network.UploadManager;
 import com.kbeanie.multipicker.api.FilePicker;
 import com.kbeanie.multipicker.api.Picker;
@@ -76,7 +76,7 @@ public class UploadFile extends AppCompatActivity {
                         AlertHandler.noUploaderAlert(UploadFile.this);
                     } else {
                         //Let the upload manager go from here.
-                        UploadManager.getManager().handleUpload(filePicker, file, selectedUploader);
+                        UploadManager.getManager().handleUpload(UploadFile.this, file, selectedUploader);
                     }
                 }
             }
@@ -111,7 +111,7 @@ public class UploadFile extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Picker.PICK_FILE && resultCode == RESULT_OK) {
             filePicker.submit(data);
-            fileSelect.setText(data.getDataString());
+            fileSelect.setText(data.getData().getPath());
             file = data;
         }
     }

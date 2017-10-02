@@ -1,4 +1,4 @@
-package com.cloudcraftgaming.universalfileuploader.network;
+package com.cloudcraftgaming.universalfileuploader.handlers;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
