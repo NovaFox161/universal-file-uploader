@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import com.cloudcraftgaming.universalfileuploader.handlers.AlertHandler;
 import com.cloudcraftgaming.universalfileuploader.handlers.SettingsManager;
 import okhttp3.*;
-import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 
@@ -17,7 +16,6 @@ import java.io.File;
 
 public class NothingDomains extends AsyncTask<Object, Void, String> {
     private static final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
-    private static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
 
     public NothingDomains() {
     }
@@ -30,10 +28,7 @@ public class NothingDomains extends AsyncTask<Object, Void, String> {
             OkHttpClient client = new OkHttpClient();
 
             RequestBody partBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                    .addFormDataPart("__Content-Type", FilenameUtils.getExtension(file.getName()))
-                    .addFormDataPart("filename", FilenameUtils.getName(file.getName()))
-                    .addFormDataPart("name", "files[]")
-                    .addFormDataPart("body", "image.png", RequestBody.create(MEDIA_TYPE_PNG, file))
+                    .addFormDataPart("files[]", "image.png", RequestBody.create(MEDIA_TYPE_PNG, file))
                     .build();
 
             Request request = new Request.Builder()
