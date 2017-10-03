@@ -12,11 +12,28 @@
             android:id="@+id/wifi-only-upload"
             />
 
+    <Switch
+            android:text="@string/copy_link_to_clipboard"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/copy-clipboard"
+            android:checked="true"/>
+
     <View
             android:layout_width="fill_parent"
             android:layout_height="2dip"
             android:background="#4286f4"
             android:id="@+id/divider-1"/>
+
+    <TextView
+            android:text="@string/nothing_domains_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nothing-domains-group-label"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:typeface="normal"
+            android:textSize="18sp"/>
 
     <TextView
 
@@ -34,4 +51,20 @@
             android:labelFor="@id/nothing-domains-key-label"
             tools:ignore="LabelFor"
             />
+
+    <TextView
+
+            android:text="@string/nothing_domains_base_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nothing-domains-link-label"/>
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="@string/https_nothing_domains"
+            android:ems="10"
+            android:id="@+id/nothing-domains-link"
+            tools:ignore="LabelFor"/>
 </LinearLayout>

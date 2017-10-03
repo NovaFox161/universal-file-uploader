@@ -11,8 +11,10 @@ import org.json.JSONObject;
 
 public class SettingsActivity extends AppCompatActivity {
     Switch uploadOnlyOnWifi;
+    Switch copyToClipboard;
 
     EditText nothingDomainsKey;
+    EditText nothingDomainsLink;
 
 
     @Override
@@ -23,7 +25,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         //Register objects
         uploadOnlyOnWifi = findViewById(R.id.wifi_only_upload);
+        copyToClipboard = findViewById(R.id.copy_clipboard);
         nothingDomainsKey = findViewById(R.id.nothing_domains_key);
+        nothingDomainsLink = findViewById(R.id.nothing_domains_link);
 
         refreshDisplay();
     }
@@ -39,7 +43,9 @@ public class SettingsActivity extends AppCompatActivity {
 
             JSONObject settings = new JSONObject();
             settings.put("WifiOnly", uploadOnlyOnWifi.isChecked());
+            settings.put("CopyClipboard", copyToClipboard.isChecked());
             settings.put("NothingDomainsKey", nothingDomainsKey.getText().toString());
+            settings.put("NothingDomainsLink", nothingDomainsLink.getText().toString());
 
             SettingsManager.getManager().saveSettings(settings);
         } catch (JSONException e) {
@@ -49,6 +55,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void refreshDisplay() {
         uploadOnlyOnWifi.setChecked(SettingsManager.getManager().getSettings().getWifiOnly());
+        copyToClipboard.setChecked(SettingsManager.getManager().getSettings().getCopyToClipboard());
         nothingDomainsKey.setText(SettingsManager.getManager().getSettings().getNothingDomainsKey());
+        nothingDomainsLink.setText(SettingsManager.getManager().getSettings().getNothingDomainsLink());
     }
 }

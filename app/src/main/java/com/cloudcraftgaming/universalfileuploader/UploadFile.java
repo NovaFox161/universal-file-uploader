@@ -1,7 +1,11 @@
 package com.cloudcraftgaming.universalfileuploader;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -63,6 +67,7 @@ public class UploadFile extends AppCompatActivity {
         //Do button things
         fileSelect.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                requestRuntimePermission();
                 filePicker.pickFile();
             }
         });
@@ -113,6 +118,16 @@ public class UploadFile extends AppCompatActivity {
             filePicker.submit(data);
             fileSelect.setText(data.getData().getPath());
             file = data;
+        }
+    }
+
+    private void requestRuntimePermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(UploadFile.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(UploadFile.this,
+                        new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            }
         }
     }
 }
