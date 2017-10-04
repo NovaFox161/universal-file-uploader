@@ -7,7 +7,8 @@ package com.cloudcraftgaming.universalfileuploader.network;
  */
 
 public enum Host {
-    NOTHING_DOMAINS("Nothing Domains", "https://nothing.domains/api/upload/pomf", "files[]", HostType.POMF);
+    NOTHING_DOMAINS("Nothing Domains", "https://nothing.domains/api/upload/pomf", "files[]", HostType.POMF),
+    IMGUR("Imgur", "https://api.imgur.com/3/image", "image", HostType.IMGUR);
 
     private String name;
     private String url;

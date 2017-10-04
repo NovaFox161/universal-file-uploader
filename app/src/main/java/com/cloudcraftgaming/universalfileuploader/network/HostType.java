@@ -7,5 +7,5 @@ package com.cloudcraftgaming.universalfileuploader.network;
  */
 
 public enum HostType {
-    POMF
+    POMF, IMGUR
 }
