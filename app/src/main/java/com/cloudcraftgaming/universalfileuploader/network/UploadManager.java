@@ -44,6 +44,8 @@ public class UploadManager {
         if (host == Host.NOTHING_DOMAINS) {
             String baseUrl = SettingsManager.getManager().getSettings().getNothingDomainsLink();
             completeUrl = baseUrl + fileUrl;
+        } else if (host == Host.POMF_CAT) {
+            completeUrl = "https://a.pomf.cat/" + fileUrl;
         }
 
         if (SettingsManager.getManager().getSettings().getCopyToClipboard()) {
