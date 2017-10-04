@@ -9,9 +9,9 @@ import android.os.AsyncTask;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
-import com.cloudcraftgaming.universalfileuploader.handlers.SettingsManager;
 import com.cloudcraftgaming.universalfileuploader.network.Host;
 import com.cloudcraftgaming.universalfileuploader.network.UploadManager;
+import com.cloudcraftgaming.universalfileuploader.utils.AuthKey;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -65,7 +65,7 @@ public class PomfUploader extends AsyncTask<Object, Void, String> {
 
             conn.setRequestMethod("POST");
 
-            conn.addRequestProperty("Authorization", SettingsManager.getManager().getSettings().getNothingDomainsKey());
+            conn.addRequestProperty("Authorization", AuthKey.getAuthKey(host));
             conn.setRequestProperty("Connection", "Keep-Alive");
             String boundary = "*****";
             conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
