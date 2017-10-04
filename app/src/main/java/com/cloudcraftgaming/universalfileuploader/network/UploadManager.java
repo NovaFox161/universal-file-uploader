@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.widget.Spinner;
 import android.widget.Toast;
 import com.cloudcraftgaming.universalfileuploader.handlers.SettingsManager;
-import com.cloudcraftgaming.universalfileuploader.network.uploaders.NothingDomains;
+import com.cloudcraftgaming.universalfileuploader.network.uploaders.PomfUploader;
 
 /**
  * Created by Nova Fox on 9/30/17.
@@ -26,14 +26,16 @@ public class UploadManager {
     }
 
     public void handleUpload(Context context, Intent file, Spinner selectedUploader) {
-        if (selectedUploader.getSelectedItemPosition() == 1) {
-            new NothingDomains().execute(file, context);
+        Host host = Host.fromName(selectedUploader.getSelectedItem().toString());
+        assert host != null;
+        if (host.getType() == HostType.POMF) {
+            new PomfUploader(host).execute(file, context);
         }
     }
 
-    public void finishUpload(String fileUrl, String host, Context source) {
-        String completeUrl = "";
-        if (host.equalsIgnoreCase("NothingDomains")) {
+    public void finishUpload(String fileUrl, Host host, Context source) {
+        String completeUrl = fileUrl;
+        if (host == Host.NOTHING_DOMAINS) {
             String baseUrl = SettingsManager.getManager().getSettings().getNothingDomainsLink();
             completeUrl = baseUrl + fileUrl;
         }

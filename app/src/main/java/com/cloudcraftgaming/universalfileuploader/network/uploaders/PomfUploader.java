@@ -10,6 +10,7 @@ import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 import com.cloudcraftgaming.universalfileuploader.handlers.SettingsManager;
+import com.cloudcraftgaming.universalfileuploader.network.Host;
 import com.cloudcraftgaming.universalfileuploader.network.UploadManager;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,16 +23,18 @@ import java.net.URL;
 import java.util.Scanner;
 
 /**
- * Created by Nova Fox on 10/1/17.
+ * Created by Nova Fox on 10/3/17.
  * Website: www.cloudcraftgaming.com
  * For Project: universal-file-uploader
  */
 
-public class NothingDomains extends AsyncTask<Object, Void, String> {
+public class PomfUploader extends AsyncTask<Object, Void, String> {
     @SuppressLint("StaticFieldLeak")
     private Context source;
+    private final Host host;
 
-    public NothingDomains() {
+    public PomfUploader(Host _host) {
+        host = _host;
     }
 
     @Override
@@ -52,11 +55,9 @@ public class NothingDomains extends AsyncTask<Object, Void, String> {
             String fileName = fileUri.getLastPathSegment();
             String contentType = cr.getType(fileUri);
             String extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(contentType);
-            String uploadUrl = "https://nothing.domains/api/upload/pomf";
-            String fieldName = "files[]";
 
             //do POST request
-            HttpURLConnection conn = (HttpURLConnection) new URL(uploadUrl).openConnection();
+            HttpURLConnection conn = (HttpURLConnection) new URL(host.getUrl()).openConnection();
 
             conn.setDoOutput(true);
             conn.setDoInput(true);
@@ -72,7 +73,7 @@ public class NothingDomains extends AsyncTask<Object, Void, String> {
             DataOutputStream out = new DataOutputStream(conn.getOutputStream());
             out.writeBytes("--" + boundary + "\r\n");
             out.writeBytes(String.format("Content-Disposition: form-data; name=\"%s\";filename=\"%s.%s\"\r\nContent-type: %s\r\n",
-                    fieldName, fileName, extension, contentType));
+                    host.getFieldName(), fileName, extension, contentType));
             out.writeBytes("\r\n");
 
             Log.d(tag, fileName + "." + extension);
@@ -145,6 +146,6 @@ public class NothingDomains extends AsyncTask<Object, Void, String> {
 
     @Override
     protected void onPostExecute(String response) {
-        UploadManager.getManager().finishUpload(response, "NothingDomains", source);
+        UploadManager.getManager().finishUpload(response, host, source);
     }
 }

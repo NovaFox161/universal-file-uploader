@@ -11,20 +11,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import com.cloudcraftgaming.universalfileuploader.activities.SettingsActivity;
 import com.cloudcraftgaming.universalfileuploader.handlers.AlertHandler;
 import com.cloudcraftgaming.universalfileuploader.handlers.SettingsManager;
+import com.cloudcraftgaming.universalfileuploader.network.Host;
 import com.cloudcraftgaming.universalfileuploader.network.UploadManager;
 import com.kbeanie.multipicker.api.FilePicker;
 import com.kbeanie.multipicker.api.Picker;
 import com.kbeanie.multipicker.api.callbacks.FilePickerCallback;
 import com.kbeanie.multipicker.api.entity.ChosenFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class UploadFile extends AppCompatActivity {
+public class UploadFileActivity extends AppCompatActivity {
     FilePicker filePicker;
 
     Intent file = null;
@@ -64,6 +67,19 @@ public class UploadFile extends AppCompatActivity {
         uploadButton = findViewById(R.id.upload_button);
         selectedUploader = findViewById(R.id.selected_uploader);
 
+        //Set upload selector list dynamically
+        List<String> uploaders = new ArrayList<>();
+        uploaders.add("Select Uploader");
+
+        for (Host h : Host.values()) {
+            uploaders.add(h.getName());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getApplicationContext(),
+                android.R.layout.simple_spinner_item, uploaders);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        selectedUploader.setAdapter(adapter);
+
         //Do button things
         fileSelect.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -75,13 +91,13 @@ public class UploadFile extends AppCompatActivity {
         uploadButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (file == null) {
-                    AlertHandler.noFileAlert(UploadFile.this);
+                    AlertHandler.noFileAlert(UploadFileActivity.this);
                 } else {
                     if (selectedUploader.getSelectedItemPosition() == 0) {
-                        AlertHandler.noUploaderAlert(UploadFile.this);
+                        AlertHandler.noUploaderAlert(UploadFileActivity.this);
                     } else {
                         //Let the upload manager go from here.
-                        UploadManager.getManager().handleUpload(UploadFile.this, file, selectedUploader);
+                        UploadManager.getManager().handleUpload(UploadFileActivity.this, file, selectedUploader);
                     }
                 }
             }
@@ -111,6 +127,7 @@ public class UploadFile extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -123,9 +140,9 @@ public class UploadFile extends AppCompatActivity {
 
     private void requestRuntimePermission() {
         if (Build.VERSION.SDK_INT >= 23) {
-            if (ContextCompat.checkSelfPermission(UploadFile.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            if (ContextCompat.checkSelfPermission(UploadFileActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(UploadFile.this,
+                ActivityCompat.requestPermissions(UploadFileActivity.this,
                         new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
         }
