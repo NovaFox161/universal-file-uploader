@@ -14,7 +14,7 @@ public class AuthKey {
         if (host == Host.NOTHING_DOMAINS) {
             return SettingsManager.getManager().getSettings().getNothingDomainsKey();
         } else {
-            return "";
+            return "NO_AUTH_KEY";
         }
     }
 }

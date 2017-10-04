@@ -8,6 +8,7 @@ package com.cloudcraftgaming.universalfileuploader.network;
 
 public enum Host {
     NOTHING_DOMAINS("Nothing Domains", "https://nothing.domains/api/upload/pomf", "files[]", 500, HostType.POMF),
+    MIX_TAPE("mixtape.moe", "https://mixtape.moe/upload.php", "files[]", 100, HostType.POMF),
     IMGUR("Imgur", "https://api.imgur.com/3/image", "image", 500, HostType.IMGUR);
 
     private String name;

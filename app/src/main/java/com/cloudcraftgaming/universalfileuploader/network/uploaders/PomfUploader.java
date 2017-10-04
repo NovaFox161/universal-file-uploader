@@ -66,7 +66,9 @@ public class PomfUploader extends AsyncTask<Object, Void, String> {
 
             conn.setRequestMethod("POST");
 
-            conn.addRequestProperty("Authorization", AuthKey.getAuthKey(host));
+            if (!AuthKey.getAuthKey(host).equalsIgnoreCase("NO_AUTH_KEY")) {
+                conn.addRequestProperty("Authorization", AuthKey.getAuthKey(host));
+            }
             conn.setRequestProperty("Connection", "Keep-Alive");
             String boundary = "*****";
             conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);

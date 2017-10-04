@@ -14,6 +14,7 @@ Google Play Page: {COMING SOON}
 ## Supported Hosts
 
 * Nothing Domains
+* mixtape.moe
 
 More hosts coming soon!
 
