@@ -11,7 +11,7 @@ Google Play Page: {COMING SOON}
 * Simple file selector
 * Easy to use
 
-### Supported Hosts
+## Supported Hosts
 
 * Nothing Domains
 
