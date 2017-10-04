@@ -6,8 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Spinner;
 import android.widget.Toast;
+import com.cloudcraftgaming.universalfileuploader.handlers.AlertHandler;
 import com.cloudcraftgaming.universalfileuploader.handlers.SettingsManager;
 import com.cloudcraftgaming.universalfileuploader.network.uploaders.PomfUploader;
+import com.cloudcraftgaming.universalfileuploader.utils.FileUtils;
 
 /**
  * Created by Nova Fox on 9/30/17.
@@ -28,8 +30,12 @@ public class UploadManager {
     public void handleUpload(Context context, Intent file, Spinner selectedUploader) {
         Host host = Host.fromName(selectedUploader.getSelectedItem().toString());
         assert host != null;
-        if (host.getType() == HostType.POMF) {
-            new PomfUploader(host).execute(file, context);
+        if (!FileUtils.isTooLarge(file, host)) {
+            if (host.getType() == HostType.POMF) {
+                new PomfUploader(host).execute(file, context);
+            }
+        } else {
+            AlertHandler.fileTooLargeAlert(context);
         }
     }
 

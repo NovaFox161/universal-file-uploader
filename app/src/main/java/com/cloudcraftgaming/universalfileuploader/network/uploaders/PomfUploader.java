@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
+import com.cloudcraftgaming.universalfileuploader.handlers.AlertHandler;
 import com.cloudcraftgaming.universalfileuploader.network.Host;
 import com.cloudcraftgaming.universalfileuploader.network.UploadManager;
 import com.cloudcraftgaming.universalfileuploader.utils.AuthKey;
@@ -124,6 +125,7 @@ public class PomfUploader extends AsyncTask<Object, Void, String> {
         } catch (Exception e) {
             Log.e(tag, e.getMessage());
             e.printStackTrace();
+            AlertHandler.uploadErrorAlert(source);
             return String.format("Upload Failed, check your internet connection (%s)", e.getMessage());
         }
         return extractUrl(result);

@@ -27,7 +27,7 @@ public class AlertHandler {
 
     public static void noUploaderAlert(Context context) {
         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setTitle("No Uploader");
+        alertDialog.setTitle("No Uploader Selected");
         alertDialog.setMessage("You must select an uploader!");
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
@@ -41,7 +41,20 @@ public class AlertHandler {
     public static void uploadErrorAlert(Context context) {
         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
         alertDialog.setTitle("Upload Error");
-        alertDialog.setMessage("An error has occurred while uploading your file!");
+        alertDialog.setMessage("An error has occurred while uploading your file! Check your internet connection");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+    }
+
+    public static void fileTooLargeAlert(Context context) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+        alertDialog.setTitle("Too Large!");
+        alertDialog.setMessage("The selected file is too large for the selected uploader!");
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
                 new DialogInterface.OnClickListener() {
                     @Override

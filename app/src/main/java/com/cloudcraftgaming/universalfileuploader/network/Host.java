@@ -7,18 +7,20 @@ package com.cloudcraftgaming.universalfileuploader.network;
  */
 
 public enum Host {
-    NOTHING_DOMAINS("Nothing Domains", "https://nothing.domains/api/upload/pomf", "files[]", HostType.POMF),
-    IMGUR("Imgur", "https://api.imgur.com/3/image", "image", HostType.IMGUR);
+    NOTHING_DOMAINS("Nothing Domains", "https://nothing.domains/api/upload/pomf", "files[]", 500, HostType.POMF),
+    IMGUR("Imgur", "https://api.imgur.com/3/image", "image", 500, HostType.IMGUR);
 
     private String name;
     private String url;
     private String fieldName;
+    private long sizeLimitMb;
     private HostType type;
 
-    Host(String _name, String _url, String _fieldName, HostType _type) {
+    Host(String _name, String _url, String _fieldName, long _sizeLimitMb, HostType _type) {
         name = _name;
         url = _url;
         fieldName = _fieldName;
+        sizeLimitMb = _sizeLimitMb;
         type = _type;
     }
 
@@ -32,6 +34,10 @@ public enum Host {
 
     public String getFieldName() {
         return fieldName;
+    }
+
+    public long getSizeLimitMb() {
+        return sizeLimitMb;
     }
 
     public HostType getType() {
