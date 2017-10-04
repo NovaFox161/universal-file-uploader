@@ -46,6 +46,8 @@ public class UploadManager {
             completeUrl = baseUrl + fileUrl;
         } else if (host == Host.POMF_CAT) {
             completeUrl = "https://a.pomf.cat/" + fileUrl;
+        } else if (host == Host.POMFE_CO) {
+            completeUrl = "https://a.pomfe.co/" + fileUrl;
         }
 
         if (SettingsManager.getManager().getSettings().getCopyToClipboard()) {
