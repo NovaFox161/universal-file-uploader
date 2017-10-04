@@ -141,8 +141,10 @@ public class PomfUploader extends AsyncTask<Object, Void, String> {
             return fileJson.getString("url");
         } catch (StringIndexOutOfBoundsException e) {
             //No need to print error info, we already know what this is caused by
+            AlertHandler.uploadErrorAlert(source);
             return result;
         } catch (Exception e) {
+            AlertHandler.uploadErrorAlert(source);
             e.printStackTrace();
             return result;
         }
