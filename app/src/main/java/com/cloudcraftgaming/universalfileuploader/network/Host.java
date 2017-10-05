@@ -11,7 +11,8 @@ public enum Host {
     MIX_TAPE("mixtape.moe", "https://mixtape.moe/upload.php", "files[]", 100, HostType.POMF),
     POMF_CAT("pomf.cat", "http://pomf.cat/upload.php", "files[]", 75, HostType.POMF),
     POMFE_CO("pomfe.co", "https://pomfe.co/upload.php", "files[]", 100, HostType.POMF),
-    VIDGA_ME("vidga.me", "https://vidga.me/upload.php", "files[]", 100, HostType.POMF);
+    VIDGA_ME("vidga.me", "https://vidga.me/upload.php", "files[]", 100, HostType.POMF),
+    COMFY_MOE("comfy.moe", "https://comfy.moe/upload.php", "files[]", 50, HostType.POMF);
 
     private String name;
     private String url;
