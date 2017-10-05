@@ -53,6 +53,14 @@
                 android:id="@+id/upload-button"
                 android:baselineAligned="false"
                 android:layout_weight="1"/>
+
+        <com.google.android.gms.ads.doubleclick.PublisherAdView
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ads:adSize="SMART_BANNER"
+                ads:adUnitId="ca-app-pub-2288816166898922/1740699260"
+                android:id="@+id/publisherAdView"/>
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

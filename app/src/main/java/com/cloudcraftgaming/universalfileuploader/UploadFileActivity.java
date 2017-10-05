@@ -19,6 +19,8 @@ import com.cloudcraftgaming.universalfileuploader.handlers.AlertHandler;
 import com.cloudcraftgaming.universalfileuploader.handlers.SettingsManager;
 import com.cloudcraftgaming.universalfileuploader.network.Host;
 import com.cloudcraftgaming.universalfileuploader.network.UploadManager;
+import com.google.android.gms.ads.doubleclick.PublisherAdRequest;
+import com.google.android.gms.ads.doubleclick.PublisherAdView;
 import com.kbeanie.multipicker.api.FilePicker;
 import com.kbeanie.multipicker.api.Picker;
 import com.kbeanie.multipicker.api.callbacks.FilePickerCallback;
@@ -28,6 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UploadFileActivity extends AppCompatActivity {
+    private PublisherAdView mPublisherAdView;
+
     FilePicker filePicker;
 
     Intent file = null;
@@ -46,10 +50,14 @@ public class UploadFileActivity extends AppCompatActivity {
 
         SettingsManager.getManager().init(this);
 
-        filePicker = new FilePicker(this);
+        //Register banner ad
+        mPublisherAdView = findViewById(R.id.publisherAdView);
+        PublisherAdRequest adRequest = new PublisherAdRequest.Builder().build();
+        mPublisherAdView.loadAd(adRequest);
 
-        // filePicker.allowMultiple();
-        // filePicker.
+
+        //Register file picker
+        filePicker = new FilePicker(this);
         filePicker.setFilePickerCallback(new FilePickerCallback() {
             @Override
             public void onFilesChosen(List<ChosenFile> files) {
