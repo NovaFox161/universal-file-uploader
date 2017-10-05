@@ -9,7 +9,6 @@ import android.os.AsyncTask;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
-import com.cloudcraftgaming.universalfileuploader.handlers.AlertHandler;
 import com.cloudcraftgaming.universalfileuploader.network.Host;
 import com.cloudcraftgaming.universalfileuploader.network.UploadManager;
 import com.cloudcraftgaming.universalfileuploader.utils.AuthKey;
@@ -40,7 +39,7 @@ public class PomfUploader extends AsyncTask<Object, Void, String> {
 
     @Override
     protected String doInBackground(Object... params) {
-        String result;
+        StringBuilder result;
         String tag = "UFU";
         try {
             //Get everything we need ahead of time.
@@ -114,7 +113,13 @@ public class PomfUploader extends AsyncTask<Object, Void, String> {
             }
 
             Scanner reader = new Scanner(_is);
-            result = reader.nextLine();
+            result = new StringBuilder(reader.nextLine());
+
+            while (reader.hasNextLine()) {
+                String s = reader.nextLine();
+                Log.d(tag, "R-Next-Line: " + s);
+                result.append(s);
+            }
 
             Log.d(tag, String.format("%d: %s", responseCode, responseMessage));
             Log.d(tag, "Result: " + result);
@@ -127,10 +132,9 @@ public class PomfUploader extends AsyncTask<Object, Void, String> {
         } catch (Exception e) {
             Log.e(tag, e.getMessage());
             e.printStackTrace();
-            AlertHandler.uploadErrorAlert(source);
             return String.format("Upload Failed, check your internet connection (%s)", e.getMessage());
         }
-        return extractUrl(result);
+        return extractUrl(result.toString());
     }
 
     private String extractUrl(String result) {
@@ -141,10 +145,8 @@ public class PomfUploader extends AsyncTask<Object, Void, String> {
             return fileJson.getString("url");
         } catch (StringIndexOutOfBoundsException e) {
             //No need to print error info, we already know what this is caused by
-            AlertHandler.uploadErrorAlert(source);
             return result;
         } catch (Exception e) {
-            AlertHandler.uploadErrorAlert(source);
             e.printStackTrace();
             return result;
         }
