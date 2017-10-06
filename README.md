@@ -15,6 +15,11 @@ Google Play Page: {COMING SOON}
 
 * Nothing Domains
 * mixtape.moe
+* pomf.cat
+* pomfe.co
+* vidga.me
+* comfy.moe
+* rokket.space
 
 More hosts coming soon!
 
