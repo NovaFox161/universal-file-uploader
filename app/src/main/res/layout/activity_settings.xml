@@ -5,6 +5,12 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <CheckBox
+            android:text="@string/agree_to_privacy_policy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/privacy_agree"/>
+
     <Switch
             android:text="@string/upload_only_on_wifi"
             android:layout_width="match_parent"

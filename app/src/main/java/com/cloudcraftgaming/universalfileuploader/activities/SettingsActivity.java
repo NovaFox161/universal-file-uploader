@@ -2,6 +2,7 @@ package com.cloudcraftgaming.universalfileuploader.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Switch;
 import com.cloudcraftgaming.universalfileuploader.R;
@@ -10,6 +11,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SettingsActivity extends AppCompatActivity {
+    CheckBox privacyAgree;
+
     Switch uploadOnlyOnWifi;
     Switch copyToClipboard;
 
@@ -24,6 +27,7 @@ public class SettingsActivity extends AppCompatActivity {
 
 
         //Register objects
+        privacyAgree = findViewById(R.id.privacy_agree);
         uploadOnlyOnWifi = findViewById(R.id.wifi_only_upload);
         copyToClipboard = findViewById(R.id.copy_clipboard);
         nothingDomainsKey = findViewById(R.id.nothing_domains_key);
@@ -42,6 +46,7 @@ public class SettingsActivity extends AppCompatActivity {
         try {
 
             JSONObject settings = new JSONObject();
+            settings.put("privacyAgree", privacyAgree.isChecked());
             settings.put("WifiOnly", uploadOnlyOnWifi.isChecked());
             settings.put("CopyClipboard", copyToClipboard.isChecked());
             settings.put("NothingDomainsKey", nothingDomainsKey.getText().toString());
@@ -54,6 +59,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void refreshDisplay() {
+        privacyAgree.setChecked(SettingsManager.getManager().getSettings().getPrivacyAgree());
         uploadOnlyOnWifi.setChecked(SettingsManager.getManager().getSettings().getWifiOnly());
         copyToClipboard.setChecked(SettingsManager.getManager().getSettings().getCopyToClipboard());
         nothingDomainsKey.setText(SettingsManager.getManager().getSettings().getNothingDomainsKey());

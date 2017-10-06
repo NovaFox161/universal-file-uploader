@@ -2,6 +2,7 @@ package com.cloudcraftgaming.universalfileuploader;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -91,13 +92,24 @@ public class UploadFileActivity extends AppCompatActivity {
         //Do button things
         fileSelect.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                requestRuntimePermission();
-                filePicker.pickFile();
+                if (SettingsManager.getManager().getSettings().getPrivacyAgree()) {
+                    if (hasRuntimePermission()) {
+                        filePicker.pickFile();
+                    } else {
+                        requestRuntimePermission();
+                    }
+                } else {
+                    AlertHandler.noPrivacy(UploadFileActivity.this);
+                }
             }
         });
 
         uploadButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                if (!SettingsManager.getManager().getSettings().getPrivacyAgree()) {
+                    AlertHandler.noPrivacy(UploadFileActivity.this);
+                    return;
+                }
                 if (file == null) {
                     AlertHandler.noFileAlert(UploadFileActivity.this);
                 } else {
@@ -130,6 +142,9 @@ public class UploadFileActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
+        } else if (id == R.id.action_privacy) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.cloudcraftgaming.com/policy/privacy-app"));
+            startActivity(browserIntent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -154,5 +169,15 @@ public class UploadFileActivity extends AppCompatActivity {
                         new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
         }
+    }
+
+    private boolean hasRuntimePermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(UploadFileActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            }
+        }
+        return true;
     }
 }

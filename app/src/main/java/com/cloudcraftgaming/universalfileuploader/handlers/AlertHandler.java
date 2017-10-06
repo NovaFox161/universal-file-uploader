@@ -49,6 +49,7 @@ public class AlertHandler {
                         dialogInterface.dismiss();
                     }
                 });
+        alertDialog.show();
     }
 
     public static void fileTooLargeAlert(Context context) {
@@ -62,5 +63,20 @@ public class AlertHandler {
                         dialogInterface.dismiss();
                     }
                 });
+        alertDialog.show();
+    }
+
+    public static void noPrivacy(Context context) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+        alertDialog.setTitle("Privacy Agreement!");
+        alertDialog.setMessage("You must agree to the privacy policy in the settings!");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Dismiss",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 }

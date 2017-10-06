@@ -9,6 +9,7 @@ import java.util.Map;
  */
 
 public class UserSettings {
+    private final boolean privacyAgree;
     private final boolean wifiOnly;
     private final boolean copyToClipboard;
 
@@ -16,6 +17,7 @@ public class UserSettings {
     private final String nothingDomainsLink;
 
     public UserSettings(Map<String, String> rawSettings) {
+        privacyAgree = Boolean.valueOf(rawSettings.get("privacyAgree"));
         wifiOnly = Boolean.valueOf(rawSettings.get("WifiOnly"));
         copyToClipboard = Boolean.valueOf(rawSettings.get("CopyClipboard"));
         nothingDomainsKey = rawSettings.get("NothingDomainsKey");
@@ -27,6 +29,7 @@ public class UserSettings {
     }
 
     public UserSettings() {
+        privacyAgree = false;
         wifiOnly = false;
         copyToClipboard = true;
         nothingDomainsKey = "";
@@ -34,6 +37,10 @@ public class UserSettings {
     }
 
     //Getters/Settings
+    public boolean getPrivacyAgree() {
+        return privacyAgree;
+    }
+
     public boolean getWifiOnly() {
         return wifiOnly;
     }
