@@ -31,6 +31,10 @@ public class UploadManager {
         Host host = Host.fromName(selectedUploader.getSelectedItem().toString());
         assert host != null;
         if (!FileUtils.isTooLarge(file, host)) {
+            if (host == Host.NOTHING_DOMAINS && (SettingsManager.getManager().getSettings().getNothingDomainsKey() == null || SettingsManager.getManager().getSettings().getNothingDomainsKey().equalsIgnoreCase(""))) {
+                AlertHandler.missingNothingDomainsAuth(context);
+                return;
+            }
             if (host.getType() == HostType.POMF) {
                 new PomfUploader(host).execute(file, context);
             }

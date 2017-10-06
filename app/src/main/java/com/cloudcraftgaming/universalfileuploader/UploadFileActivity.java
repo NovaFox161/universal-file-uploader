@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UploadFileActivity extends AppCompatActivity {
-    private PublisherAdView mPublisherAdView;
 
     FilePicker filePicker;
 
@@ -52,7 +51,7 @@ public class UploadFileActivity extends AppCompatActivity {
         SettingsManager.getManager().init(this);
 
         //Register banner ad
-        mPublisherAdView = findViewById(R.id.publisherAdView);
+        PublisherAdView mPublisherAdView = findViewById(R.id.publisherAdView);
         PublisherAdRequest adRequest = new PublisherAdRequest.Builder().build();
         mPublisherAdView.loadAd(adRequest);
 

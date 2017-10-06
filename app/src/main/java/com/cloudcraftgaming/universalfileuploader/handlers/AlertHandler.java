@@ -79,4 +79,18 @@ public class AlertHandler {
                 });
         alertDialog.show();
     }
+
+    public static void missingNothingDomainsAuth(Context context) {
+        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+        alertDialog.setTitle("Missing Auth Key!");
+        alertDialog.setMessage("Please add your nothing.domains auth key in the settings!");
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+        alertDialog.show();
+    }
 }
