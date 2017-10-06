@@ -2,7 +2,8 @@
 
 Universal File Uploader (UFU) is a simple Android App that can upload any file to the selected host.
 
-Google Play Page: {COMING SOON}
+Google Play Page: https://play.google.com/store/apps/details?id=com.cloudcraftgaming.universalfileuploader
+Privacy Policy: https://www.cloudcraftgaming.com/policy/privacy-app
 
 
 ## Core Features
