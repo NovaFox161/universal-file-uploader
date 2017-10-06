@@ -1,7 +1,11 @@
 package com.cloudcraftgaming.universalfileuploader.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -19,6 +23,8 @@ public class SettingsActivity extends AppCompatActivity {
     EditText nothingDomainsKey;
     EditText nothingDomainsLink;
 
+    Button nothingDomainsSignup;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +39,17 @@ public class SettingsActivity extends AppCompatActivity {
         nothingDomainsKey = findViewById(R.id.nothing_domains_key);
         nothingDomainsLink = findViewById(R.id.nothing_domains_link);
 
+        nothingDomainsSignup = findViewById(R.id.nothing_domains_signup);
+
         refreshDisplay();
+
+        nothingDomainsSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://nothing.domains/"));
+                startActivity(browserIntent);
+            }
+        });
     }
 
     @Override

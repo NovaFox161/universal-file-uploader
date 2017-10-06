@@ -73,4 +73,10 @@
             android:ems="10"
             android:id="@+id/nothing-domains-link"
             tools:ignore="LabelFor"/>
+
+    <Button
+            android:text="@string/sign_up_for_nothing_domains"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nothing-domains-signup"/>
 </LinearLayout>
