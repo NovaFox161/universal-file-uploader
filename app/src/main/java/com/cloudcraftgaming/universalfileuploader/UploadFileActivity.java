@@ -144,6 +144,9 @@ public class UploadFileActivity extends AppCompatActivity {
         } else if (id == R.id.action_privacy) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.cloudcraftgaming.com/policy/privacy-app"));
             startActivity(browserIntent);
+        } else if (id == R.id.action_support) {
+            Intent browserIndent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://discord.gg/2TFqyuy"));
+            startActivity(browserIndent);
         }
 
         return super.onOptionsItemSelected(item);
