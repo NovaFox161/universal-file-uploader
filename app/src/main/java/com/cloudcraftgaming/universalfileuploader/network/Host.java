@@ -7,7 +7,7 @@ package com.cloudcraftgaming.universalfileuploader.network;
  */
 
 public enum Host {
-    NOTHING_DOMAINS("Nothing Domains", "https://nothing.domains/api/upload/pomf", "files[]", 500, HostType.POMF),
+    NOTHING_DOMAINS("Nothing Domains", "https://nothing.domains/api/upload/pomf", "files[]", 50, HostType.POMF),
     MIX_TAPE("mixtape.moe", "https://mixtape.moe/upload.php", "files[]", 100, HostType.POMF),
     POMF_CAT("pomf.cat", "http://pomf.cat/upload.php", "files[]", 75, HostType.POMF),
     POMFE_CO("pomfe.co", "https://pomfe.co/upload.php", "files[]", 100, HostType.POMF),
