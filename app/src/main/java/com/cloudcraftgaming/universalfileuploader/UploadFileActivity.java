@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+
 import com.cloudcraftgaming.universalfileuploader.activities.SettingsActivity;
 import com.cloudcraftgaming.universalfileuploader.handlers.AlertHandler;
 import com.cloudcraftgaming.universalfileuploader.handlers.SettingsManager;
@@ -142,7 +143,7 @@ public class UploadFileActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             startActivity(new Intent(this, SettingsActivity.class));
         } else if (id == R.id.action_privacy) {
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.cloudcraftgaming.com/policy/privacy-app"));
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.dreamexposure.org/policy/privacy"));
             startActivity(browserIntent);
         } else if (id == R.id.action_support) {
             Intent browserIndent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://discord.gg/2TFqyuy"));
@@ -175,10 +176,7 @@ public class UploadFileActivity extends AppCompatActivity {
 
     private boolean hasRuntimePermission() {
         if (Build.VERSION.SDK_INT >= 23) {
-            if (ContextCompat.checkSelfPermission(UploadFileActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                return false;
-            }
+            return ContextCompat.checkSelfPermission(UploadFileActivity.this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
         }
         return true;
     }

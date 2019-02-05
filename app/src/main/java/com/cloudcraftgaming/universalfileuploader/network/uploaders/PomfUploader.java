@@ -9,9 +9,11 @@ import android.os.AsyncTask;
 import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
+
 import com.cloudcraftgaming.universalfileuploader.network.Host;
 import com.cloudcraftgaming.universalfileuploader.network.UploadManager;
 import com.cloudcraftgaming.universalfileuploader.utils.AuthKey;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -143,11 +145,11 @@ public class PomfUploader extends AsyncTask<Object, Void, String> {
             JSONArray jsonFiles = jsonMain.getJSONArray("files");
             JSONObject fileJson = jsonFiles.getJSONObject(0);
             return fileJson.getString("url");
-        } catch (StringIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException ignore) {
             //No need to print error info, we already know what this is caused by
             return result;
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.e("UFU", "Error extracting URL", e);
             return result;
         }
     }

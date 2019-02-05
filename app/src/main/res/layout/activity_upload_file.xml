@@ -41,15 +41,6 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"/>
 
-        <TextView
-                android:text="@string/we_highly_suggest_using_nothing_domains"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView"
-                android:layout_weight="1"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textAlignment="center"/>
-
         <Space
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

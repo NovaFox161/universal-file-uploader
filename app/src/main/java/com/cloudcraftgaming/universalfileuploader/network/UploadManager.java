@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import com.cloudcraftgaming.universalfileuploader.handlers.AlertHandler;
 import com.cloudcraftgaming.universalfileuploader.handlers.SettingsManager;
 import com.cloudcraftgaming.universalfileuploader.network.uploaders.PomfUploader;
@@ -31,10 +32,6 @@ public class UploadManager {
         Host host = Host.fromName(selectedUploader.getSelectedItem().toString());
         assert host != null;
         if (!FileUtils.isTooLarge(file, host)) {
-            if (host == Host.NOTHING_DOMAINS && (SettingsManager.getManager().getSettings().getNothingDomainsKey() == null || SettingsManager.getManager().getSettings().getNothingDomainsKey().equalsIgnoreCase(""))) {
-                AlertHandler.missingNothingDomainsAuth(context);
-                return;
-            }
             if (host.getType() == HostType.POMF) {
                 new PomfUploader(host).execute(file, context);
             }
@@ -45,10 +42,7 @@ public class UploadManager {
 
     public void finishUpload(String fileUrl, Host host, Context source) {
         String completeUrl = fileUrl;
-        if (host == Host.NOTHING_DOMAINS) {
-            String baseUrl = SettingsManager.getManager().getSettings().getNothingDomainsLink();
-            completeUrl = baseUrl + fileUrl;
-        } else if (host == Host.POMF_CAT) {
+        if (host == Host.POMF_CAT) {
             completeUrl = "https://a.pomf.cat/" + fileUrl;
         } else if (host == Host.POMFE_CO) {
             completeUrl = "https://a.pomfe.co/" + fileUrl;

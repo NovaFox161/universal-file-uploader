@@ -1,6 +1,5 @@
 package com.cloudcraftgaming.universalfileuploader.utils;
 
-import com.cloudcraftgaming.universalfileuploader.handlers.SettingsManager;
 import com.cloudcraftgaming.universalfileuploader.network.Host;
 
 /**
@@ -11,10 +10,7 @@ import com.cloudcraftgaming.universalfileuploader.network.Host;
 
 public class AuthKey {
     public static String getAuthKey(Host host) {
-        if (host == Host.NOTHING_DOMAINS) {
-            return SettingsManager.getManager().getSettings().getNothingDomainsKey();
-        } else {
-            return "NO_AUTH_KEY";
-        }
+        //Return auth key from settings if needed.
+        return "NO_AUTH_KEY";
     }
 }
